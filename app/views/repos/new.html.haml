@@ -1,0 +1,18 @@
+- title 'Repository Manager - New'
+
+%section#repo-new
+  .container{:style => "margin-top: 40px; padding-top: 10px"}
+    %span#new
+      .pageContent
+        .new
+          .container
+            .content
+              .row
+                .span12.offset2
+                  %h2
+                    リポジトリ新規作成
+                    %small
+                      ※英数字, '-', '_' のみ使用可能
+                  = render 'form'
+
+#result

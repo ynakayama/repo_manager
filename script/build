@@ -1,0 +1,26 @@
+#!/bin/sh
+
+kickstart() {
+    export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
+    export RACK_ROOT="."
+    export RACK_ENV="test"
+    export RAILS_ENV="test"
+    export COVERAGE="ON"
+    #export DATABASE_URL="$RACK_ROOT/db/test.sqlite3"
+    ruby -v
+}
+
+exec_rspec() {
+    cd $RACK_ROOT
+    bundle install --path vendor/gems
+    bundle exec rake db:migrate
+    bundle exec rake simplecov
+}
+
+main() {
+    kickstart
+    exec_rspec
+}
+
+set -ex
+main

@@ -1,0 +1,40 @@
+- title 'Repository Manager - Detail'
+
+%section#git-show
+  .container{:style => "margin-top: 40px; padding-top: 10px"}
+    .pageContent
+      .show-git
+        .container
+          .content
+            .row
+              .span12.offset2
+                %h1
+                  = "#{params[:id]}.git"
+                %table{:class => 'condensed-table bordered-table zebra-striped'}
+                  %thead
+                    %tr
+                      %th{:style => 'style="width: 150px;'}
+                        項目
+                      %th
+                        内容
+                  %tbody
+                    %tr
+                      %td
+                        ディレクトリ
+                      %td
+                        = "#{RailsApp::Application.config.git_dir}/#{params[:id]}.git"
+                    %tr
+                      %td
+                        リポジトリ
+                      %td
+                        = "ssh://yourname@#{RailsApp::Application.config.hostname}#{RailsApp::Application.config.git_dir}/#{params[:id]}.git"
+                    %tr
+                      %td
+                        最終更新日
+                      %td
+                        = File::stat(RailsApp::Application.config.git_dir + "/" + params[:id] + ".git/objects").mtime
+
+                .actions
+                  = link_to '一覧へ戻る', repos_path, :class => 'btn small'
+                  = link_to 'このリポジトリを削除する', params[:id], :data => { :confirm => '本当に削除しますか' }, :method => :delete, :class => 'btn small danger'
+
